@@ -76,6 +76,17 @@ pip install -r requirements.txt
 
 ### 🍎 macOS & 🐧 Linux Setup
 
+#### Option A: One-Click Runner (`run_mac.sh` - Easiest)
+```bash
+# Clone the repository
+git clone https://github.com/subratadas7/Truecolor-ascii-video-genarator.git
+cd Truecolor-ascii-video-genarator
+
+# Run the script (automatically creates .venv, installs requirements, and runs)
+./run_mac.sh
+```
+
+#### Option B: Manual Setup
 ```bash
 # 1. Clone the repository
 git clone https://github.com/subratadas7/Truecolor-ascii-video-genarator.git
@@ -88,6 +99,8 @@ python3 -m venv .venv
 source .venv/bin/activate
 
 # 4. Install dependencies
+pip install -r requirements.txt
+```
 pip install -r requirements.txt
 ```
 
