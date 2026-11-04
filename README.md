@@ -9,154 +9,157 @@ Supports **Windows**, **macOS**, and **Linux** out of the box.
 ## ✨ Features
 
 - **True 24-bit RGB Color**: Each ASCII character preserves the exact sampled RGB color from the source video frame.
-- **Cross-Platform Font Auto-Detection**: Automatically detects native monospace fonts:
+- **Cross-Platform Monospace Font Auto-Detection**:
   - **Windows**: `Consolas`, `Lucida Console`, `Courier New`
-  - **macOS**: `Menlo`, `Courier New`
+  - **macOS**: `Menlo`, `SF Mono`, `Courier New`
   - **Linux**: `DejaVu Sans Mono`, `Liberation Mono`
-- **Accurate Luminance Mapping**: Maps grayscale brightness values to carefully chosen ASCII density glyphs (` .,:;irsXA253hMHGS#9B&@`).
-- **Aspect-Ratio Preserving Grid**: Automatically calculates appropriate row heights based on font cell dimensions (`9x16`) so the aspect ratio is never distorted.
+- **Dynamic Cell Metrics**: Automatically calculates glyph dimensions (`get_cell_size`) based on the active font to avoid distortion, stretching, or clipping on all platforms.
+- **Optimized Video Codecs**: Uses `avc1` (H.264) with `mp4v` fallbacks, making output videos instantly playable in **Apple QuickTime Player**, **macOS Finder Quick Look (Spacebar preview)**, and **Windows Media Player / Movies & TV**.
+- **Aspect-Ratio Preserving Grid**: Scales row counts to match character dimensions so the aspect ratio is never warped.
 - **Contrast & Brightness Controls**: Fine-tune contrast and brightness multipliers to make characters pop against dark backgrounds.
-- **Customizable Resolution & FPS**: Adjust column width and target frames-per-second to strike the right balance between conversion speed and visual fidelity.
+- **1-Click Auto Runners**: Includes `run_windows.bat` for Windows and `run_mac.sh` for macOS/Linux.
 
 ---
 
-## 📋 Prerequisites
+## 🪟 Windows: Step-by-Step Guide
 
-- **Python 3.9 or higher**
-  - **Windows Users**: When installing Python from [python.org](https://www.python.org/downloads/), check the box **"Add python.exe to PATH"** on the first installer screen.
+Follow these steps on Windows:
 
----
+### Step 1: Install Python
+1. Download Python (version 3.9 or newer) from [python.org](https://www.python.org/downloads/).
+2. **IMPORTANT**: On the first installer screen, make sure to check the box:
+   > ☑️ **"Add python.exe to PATH"**
+3. Complete the setup.
 
-## 🚀 Installation & Setup
-
-### 🪟 Windows Setup
-
-#### Option A: One-Click Auto Runner (`run_windows.bat` - Easiest)
-Double-click **`run_windows.bat`**!
-- It automatically detects Python, sets up `.venv`, installs requirements, and converts `1.mp4`.
-- **Drag & Drop**: You can also drag and drop any video file directly onto `run_windows.bat` to convert it instantly without opening a terminal!
-
-#### Option B: Using PowerShell (Manual)
-```powershell
-# 1. Clone the repository
+### Step 2: Download the Project
+Open PowerShell or Command Prompt, and run:
+```cmd
 git clone https://github.com/subratadas7/Truecolor-ascii-video-genarator.git
 cd Truecolor-ascii-video-genarator
+```
+*(Or click **Code -> Download ZIP** on GitHub and extract the folder).*
 
-# 2. Create a virtual environment
+### Step 3: Add Your Video
+Place the video you want to convert into this folder and name it **`1.mp4`** (or keep its original name).
+
+### Step 4: Run the Converter
+
+#### 🟢 Method A: 1-Click Auto Run (Easiest)
+- Simply double-click **`run_windows.bat`**.
+- It will automatically set up the virtual environment, install requirements, and convert `1.mp4`.
+- **Drag & Drop**: You can also drag-and-drop any video file directly on top of `run_windows.bat` to convert it immediately.
+
+#### 🔵 Method B: Using PowerShell (Manual)
+```powershell
+# 1. Create virtual environment
 python -m venv .venv
 
-# 3. Activate the virtual environment
+# 2. Activate virtual environment
 .venv\Scripts\Activate.ps1
 
-# Note: If PowerShell shows an execution policy error, run:
+# (If you get an execution policy error, run:
 # Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-# and then re-run: .venv\Scripts\Activate.ps1
+# and then re-run .venv\Scripts\Activate.ps1)
 
-# 4. Install dependencies
+# 3. Install dependencies
 pip install -r requirements.txt
+
+# 4. Run generator
+python export_truecolor_ascii_video.py
 ```
 
-#### Option C: Using Command Prompt (CMD)
+#### 🟡 Method C: Using Command Prompt (CMD)
 ```cmd
-:: 1. Clone the repository
-git clone https://github.com/subratadas7/Truecolor-ascii-video-genarator.git
-cd Truecolor-ascii-video-genarator
-
-:: 2. Create a virtual environment
 python -m venv .venv
-
-:: 3. Activate the virtual environment
 .venv\Scripts\activate.bat
-
-:: 4. Install dependencies
 pip install -r requirements.txt
+python export_truecolor_ascii_video.py
 ```
+
+### Step 5: Check Your Output
+Your converted video will be saved as **`truecolor_ascii_output.mp4`** in the same folder. You can open and play it with Windows Media Player, Movies & TV, or VLC.
 
 ---
 
-### 🍎 macOS & 🐧 Linux Setup
+## 🍎 macOS: Step-by-Step Guide
 
-#### Option A: One-Click Runner (`run_mac.sh` - Easiest)
+Follow these steps on a Mac:
+
+### Step 1: Verify Python Installation
+Open **Terminal** (`Cmd + Space` -> type `Terminal`) and check Python:
 ```bash
-# Clone the repository
+python3 --version
+```
+*(If Python is not installed, install it via [python.org](https://www.python.org/downloads/) or via Homebrew: `brew install python`).*
+
+### Step 2: Clone the Project
+In Terminal, run:
+```bash
 git clone https://github.com/subratadas7/Truecolor-ascii-video-genarator.git
 cd Truecolor-ascii-video-genarator
+```
 
-# Run the script (automatically creates .venv, installs requirements, and runs)
+### Step 3: Add Your Video
+Place your source video into this folder as **`1.mp4`**.
+
+### Step 4: Run the Converter
+
+#### 🟢 Method A: 1-Click Auto Run (Easiest)
+Make `run_mac.sh` executable and run it:
+```bash
+chmod +x run_mac.sh
 ./run_mac.sh
 ```
+*(This automatically creates `.venv`, installs requirements, and renders `1.mp4`).*
 
-#### Option B: Manual Setup
+#### 🔵 Method B: Manual Terminal Commands
 ```bash
-# 1. Clone the repository
-git clone https://github.com/subratadas7/Truecolor-ascii-video-genarator.git
-cd Truecolor-ascii-video-genarator
-
-# 2. Create a virtual environment
+# 1. Create virtual environment
 python3 -m venv .venv
 
-# 3. Activate the virtual environment
+# 2. Activate virtual environment
 source .venv/bin/activate
 
-# 4. Install dependencies
+# 3. Install dependencies
 pip install -r requirements.txt
+
+# 4. Run the script
+python export_truecolor_ascii_video.py
 ```
-pip install -r requirements.txt
-```
+
+### Step 5: Check Your Output
+The output file is **`truecolor_ascii_output.mp4`**.
+- On Mac, you can select it in Finder and press **Spacebar (Quick Look)** to preview it instantly, or double-click to open in **QuickTime Player**.
 
 ---
 
-## 💻 Usage
+## 💻 CLI Options & Custom Settings
 
-### Quick Start
-Place an input video named `1.mp4` in the project directory, then run:
-
-- **Windows:**
-  ```cmd
-  python export_truecolor_ascii_video.py
-  ```
-- **macOS / Linux:**
-  ```bash
-  python export_truecolor_ascii_video.py
-  ```
-
-The rendered ASCII video will be saved as `truecolor_ascii_output.mp4`.
-
----
-
-### Custom Input and Output Paths
+You can customize the resolution, speed, and look using command-line arguments on either Mac or Windows:
 
 ```bash
-python export_truecolor_ascii_video.py my_video.mp4 -o my_output.mp4
+python export_truecolor_ascii_video.py [input_video] [options]
 ```
 
-> **Tip for Windows**: If your video path contains spaces, wrap it in double quotes:
-> ```powershell
-> python export_truecolor_ascii_video.py "C:\Users\YourName\Videos\input video.mp4" -o "output.mp4"
-> ```
-
----
-
-### Advanced Examples
-
-- **High-detail wide rendering:**
+### Examples:
+- **Custom input/output names:**
+  ```bash
+  python export_truecolor_ascii_video.py my_video.mp4 -o custom_output.mp4
+  ```
+- **High-detail rendering (wider terminal):**
   ```bash
   python export_truecolor_ascii_video.py 1.mp4 --width 160 --contrast 1.25 --brightness 1.15
   ```
-
-- **Smoother motion (higher FPS):**
+- **Smoother framerate:**
   ```bash
   python export_truecolor_ascii_video.py 1.mp4 --fps 24.0
   ```
-
-- **Compact / quick preview:**
+- **Compact preview:**
   ```bash
   python export_truecolor_ascii_video.py 1.mp4 --width 80 --fps 10.0
   ```
 
----
-
-## ⚙️ CLI Options & Arguments
+### Arguments Reference Table:
 
 | Argument | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
@@ -164,31 +167,41 @@ python export_truecolor_ascii_video.py my_video.mp4 -o my_output.mp4
 | `-o`, `--output` | `str` | `truecolor_ascii_output.mp4` | Destination path for the converted MP4 video. |
 | `--width` | `int` | `120` | Number of ASCII character columns across the frame (min: `30`). |
 | `--fps` | `float` | `10.0` | Output video framerate in frames per second. |
-| `--contrast` | `float` | `1.15` | Contrast enhancement factor applied to luminance values. |
-| `--brightness` | `float` | `1.05` | Brightness multiplier for glyph colors and thresholding. |
+| `--contrast` | `float` | `1.15` | Contrast factor for character luminance. |
+| `--brightness` | `float` | `1.05` | Brightness multiplier for character color. |
 
 ---
 
 ## 🔍 How It Works
 
-1. **Frame Extraction**: Reads frames from the source video using OpenCV.
-2. **Downsampling & Resizing**: Resizes each frame to `columns x rows`, scaling rows based on the font cell aspect ratio (`9x16`).
-3. **Luminance Calculation**: Computes ITU-R BT.709 perceived luminance for each cell:
-   $$\text{Luminance} = 0.2126R + 0.7152G + 0.0722B$$
-4. **Glyph Selection**: Maps computed luminance to an ASCII character density scale (`CHARS = " .,:;irsXA253hMHGS#9B&@"`).
-5. **Truecolor Rendering**: Draws each character onto a black canvas using Pillow with its original RGB color using the system's native monospace font.
-6. **Video Encoding**: Encodes the rendered frames into an MP4 video stream using OpenCV's `VideoWriter`.
+1. **Frame Extraction**: Decodes video frames via OpenCV.
+2. **Monospace Font & Cell Detection**: Loads native fonts (`Menlo` on macOS, `Consolas` on Windows) and computes character cell width and height.
+3. **Resizing & Aspect Calculation**: Resizes the image to `columns x rows` accounting for font aspect ratio.
+4. **Luminance & Color Mapping**: Computes ITU-R BT.709 perceived luminance ($0.2126R + 0.7152G + 0.0722B$) and assigns ASCII glyphs (` .,:;irsXA253hMHGS#9B&@`).
+5. **Color Drawing**: Draws every character with its sampled 24-bit RGB color onto an image canvas.
+6. **Encoding**: Saves to an MP4 video using native `avc1` / `mp4v` codec.
 
 ---
 
-## 🛠️ Windows Troubleshooting
+## 🛠️ Troubleshooting
 
+### Windows:
 - **`'python' is not recognized as an internal or external command`**:
-  Make sure you checked "Add python.exe to PATH" when installing Python. You can also re-run the Python installer and choose **Modify** to check the box.
+  Re-run the Python installer, choose **Modify**, and make sure **"Add python.exe to PATH"** is checked.
 - **PowerShell Script Execution Error (`PSSecurityException`)**:
-  Run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` in your PowerShell window and try activating the `.venv` again.
-- **Missing Codec Warning**:
-  OpenCV uses the standard `mp4v` codec which is natively supported on Windows Media Player, Movies & TV, VLC, and modern browsers.
+  Run:
+  ```powershell
+  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+  ```
+  Then re-run `.venv\Scripts\Activate.ps1`.
+- **Path with Spaces**:
+  Always enclose paths in double quotes: `python export_truecolor_ascii_video.py "C:\My Videos\input.mp4"`.
+
+### macOS:
+- **`zsh: permission denied: ./run_mac.sh`**:
+  Run `chmod +x run_mac.sh` once in Terminal to make it executable.
+- **`command not found: python3`**:
+  Install Xcode command line tools with `xcode-select --install` or download Python from [python.org](https://www.python.org/).
 
 ---
 
