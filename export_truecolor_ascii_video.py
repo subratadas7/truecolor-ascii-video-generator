@@ -14,15 +14,28 @@ CELL_W, CELL_H = 9, 16
 
 
 def load_font(size=13):
-    for path in (
+    # Candidate monospace fonts for macOS, Windows, and Linux
+    candidates = [
+        # macOS
         "/System/Library/Fonts/Menlo.ttc",
         "/System/Library/Fonts/Supplemental/Courier New.ttf",
-    ):
-        if os.path.exists(path):
-            try:
-                return ImageFont.truetype(path, size)
-            except OSError:
-                pass
+        # Windows
+        os.path.join(os.environ.get("WINDIR", "C:\\Windows"), "Fonts", "consola.ttf"),
+        os.path.join(os.environ.get("WINDIR", "C:\\Windows"), "Fonts", "lucon.ttf"),
+        os.path.join(os.environ.get("WINDIR", "C:\\Windows"), "Fonts", "cour.ttf"),
+        # Linux
+        "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+        "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf",
+        # Fallbacks by font name (PIL searches system font paths on Windows/Linux)
+        "consola.ttf",
+        "Courier New.ttf",
+        "DejaVuSansMono.ttf",
+    ]
+    for path in candidates:
+        try:
+            return ImageFont.truetype(path, size)
+        except OSError:
+            continue
     return ImageFont.load_default()
 
 
