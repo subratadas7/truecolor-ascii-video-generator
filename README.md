@@ -31,7 +31,12 @@ Supports **Windows**, **macOS**, and **Linux** out of the box.
 
 ### 🪟 Windows Setup
 
-#### Option A: Using PowerShell (Recommended)
+#### Option A: One-Click Auto Runner (`run_windows.bat` - Easiest)
+Double-click **`run_windows.bat`**!
+- It automatically detects Python, sets up `.venv`, installs requirements, and converts `1.mp4`.
+- **Drag & Drop**: You can also drag and drop any video file directly onto `run_windows.bat` to convert it instantly without opening a terminal!
+
+#### Option B: Using PowerShell (Manual)
 ```powershell
 # 1. Clone the repository
 git clone https://github.com/subratadas7/Truecolor-ascii-video-genarator.git
@@ -51,7 +56,7 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-#### Option B: Using Command Prompt (CMD)
+#### Option C: Using Command Prompt (CMD)
 ```cmd
 :: 1. Clone the repository
 git clone https://github.com/subratadas7/Truecolor-ascii-video-genarator.git

@@ -15,19 +15,21 @@ CELL_W, CELL_H = 9, 16
 
 def load_font(size=13):
     # Candidate monospace fonts for macOS, Windows, and Linux
+    windir = os.environ.get("WINDIR") or os.environ.get("SystemRoot") or "C:\\Windows"
     candidates = [
+        # Windows
+        os.path.join(windir, "Fonts", "consola.ttf"),
+        os.path.join(windir, "Fonts", "lucon.ttf"),
+        os.path.join(windir, "Fonts", "cour.ttf"),
         # macOS
         "/System/Library/Fonts/Menlo.ttc",
         "/System/Library/Fonts/Supplemental/Courier New.ttf",
-        # Windows
-        os.path.join(os.environ.get("WINDIR", "C:\\Windows"), "Fonts", "consola.ttf"),
-        os.path.join(os.environ.get("WINDIR", "C:\\Windows"), "Fonts", "lucon.ttf"),
-        os.path.join(os.environ.get("WINDIR", "C:\\Windows"), "Fonts", "cour.ttf"),
         # Linux
         "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
         "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf",
         # Fallbacks by font name (PIL searches system font paths on Windows/Linux)
         "consola.ttf",
+        "cour.ttf",
         "Courier New.ttf",
         "DejaVuSansMono.ttf",
     ]
@@ -36,7 +38,10 @@ def load_font(size=13):
             return ImageFont.truetype(path, size)
         except OSError:
             continue
-    return ImageFont.load_default()
+    try:
+        return ImageFont.load_default(size=size)
+    except TypeError:
+        return ImageFont.load_default()
 
 
 def render_rgb_ascii(frame_bgr, columns, font, contrast=1.15, brightness=1.05):
@@ -94,12 +99,29 @@ def convert(input_path, output_path, columns=120, fps=10.0,
 
     rows = max(1, round(columns * height / width * CELL_W / CELL_H))
     output_size = (columns * CELL_W, rows * CELL_H)
-    writer = cv2.VideoWriter(
-        output_path, cv2.VideoWriter_fourcc(*"mp4v"), fps, output_size
-    )
-    if not writer.isOpened():
+
+    parent_dir = os.path.dirname(os.path.abspath(output_path))
+    if parent_dir and not os.path.exists(parent_dir):
+        os.makedirs(parent_dir, exist_ok=True)
+
+    writer = None
+    for fourcc_code in ("mp4v", "avc1", "H264", "XVID"):
+        try:
+            candidate = cv2.VideoWriter(
+                output_path, cv2.VideoWriter_fourcc(*fourcc_code), fps, output_size
+            )
+            if candidate.isOpened():
+                writer = candidate
+                break
+        except Exception:
+            continue
+
+    if writer is None or not writer.isOpened():
         cap.release()
-        raise RuntimeError("Could not create output MP4.")
+        raise RuntimeError(
+            f"Could not create output video at '{output_path}'. "
+            "Ensure the destination folder is writable and OpenCV video codec is available."
+        )
 
     step = max(1, round(source_fps / fps))
     font = load_font()
