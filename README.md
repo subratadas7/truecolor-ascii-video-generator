@@ -1,4 +1,8 @@
-# Truecolor ASCII Video Generator 🎬✨
+# Stable ASCII Video
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-brightgreen.svg)](https://www.python.org/)
+[![Platform](https://img.shields.io/badge/Platform-macOS%20%7C%20Windows%20%7C%20Linux-lightgrey.svg)]()
 
 A high-performance Python tool that transforms any video into a vibrant, truecolor (24-bit RGB) ASCII art video. Instead of relying on ANSI terminal escape sequences or pre-rendered text files, it samples original RGB colors directly from the source video cells and dynamically renders anti-aliased monospace glyphs onto a crisp video canvas.
 
