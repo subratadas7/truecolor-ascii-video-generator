@@ -12,6 +12,8 @@ __pycache__/
 # macOS system files
 .DS_Store
 
-# Output video files
+# Output and duplicate video files
 truecolor_ascii_output.mp4
+truecolor_ascii_exporter.mp4
+*_output.mp4
 
