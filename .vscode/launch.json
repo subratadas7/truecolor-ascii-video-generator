@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Convert Default (1.mp4)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/export_truecolor_ascii_video.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Python: Convert High Quality (160 cols, 15 FPS)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/export_truecolor_ascii_video.py",
+      "args": ["1.mp4", "--width", "160", "--fps", "15.0", "--contrast", "1.25", "--brightness", "1.1"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}

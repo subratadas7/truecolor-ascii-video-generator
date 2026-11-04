@@ -133,6 +133,30 @@ The output file is **`truecolor_ascii_output.mp4`**.
 
 ---
 
+## 🧑‍💻 Running in VS Code (Visual Studio Code)
+
+This project has built-in **`.vscode`** configuration for both Windows and macOS:
+
+1. **Open the folder in VS Code**:
+   - Go to `File > Open Folder...` and select `Truecolor-ascii-video-genarator`.
+2. **Install the Python Extension**:
+   - Install the official **Python** extension (`ms-python.python`) if not already installed.
+3. **Select the Python Interpreter**:
+   - Press `Ctrl + Shift + P` (Windows) or `Cmd + Shift + P` (macOS).
+   - Type and select **`Python: Select Interpreter`**.
+   - Choose the one pointing to `./.venv`.
+4. **Run the Project**:
+   - **▷ Play Button**: Open `export_truecolor_ascii_video.py` and click the **Run Python File (Play icon)** in the top-right corner.
+   - **F5 / Run & Debug**: Press `F5` to run with debugging. You can select either:
+     - `Python: Convert Default (1.mp4)`
+     - `Python: Convert High Quality (160 cols, 15 FPS)`
+   - **Integrated Terminal**: Open the terminal (`` Ctrl + ` `` or `` Cmd + ` ``) and run:
+     ```bash
+     python export_truecolor_ascii_video.py
+     ```
+
+---
+
 ## 💻 CLI Options & Custom Settings
 
 You can customize the resolution, speed, and look using command-line arguments on either Mac or Windows:
