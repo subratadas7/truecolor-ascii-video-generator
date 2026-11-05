@@ -1,8 +1,20 @@
 # Stable ASCII Video
 
+<p align="center">
+  <img src="assets/logo.png" alt="TrueColor ASCII Video Logo" width="100%">
+</p>
+
+<p align="center">
+  <strong>Convert videos into colorful ASCII art!</strong>
+</p>
+
+<p align="center">
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-brightgreen.svg)](https://www.python.org/)
 [![Platform](https://img.shields.io/badge/Platform-macOS%20%7C%20Windows%20%7C%20Linux-lightgrey.svg)]()
+
+</p>
 
 A high-performance Python tool that transforms any video into a vibrant, truecolor (24-bit RGB) ASCII art video. Instead of relying on ANSI terminal escape sequences or pre-rendered text files, it samples original RGB colors directly from the source video cells and dynamically renders anti-aliased monospace glyphs onto a crisp video canvas.
 
